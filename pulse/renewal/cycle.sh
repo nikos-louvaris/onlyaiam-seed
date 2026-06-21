@@ -74,7 +74,20 @@ else
   log "   flag-only (default, zero-LLM): $stale_count stale views χρειάζονται ανθρώπινη ματιά"
 fi
 
-log "⑤ ΜΟΤΙΒΟ — patterns (≥N εμφανίσεις → patterns/)  [skeleton]"
-log "⑥ ΚΛΑΔΕΨΕ — forget orphans/τελειωμένες διάρκειες  [skeleton, δεν κλαδεύει ζωντανά]"
+log "⑤ ΜΟΤΙΒΟ — patterns (≥N εμφανίσεις → patterns/, zero-LLM)"
+PAT_JSON=$(python3 "$MEM/pattern_detect.py" --reflective "$REFLECTIVE" --json)
+pat_count=$(echo "$PAT_JSON" | python3 -c "import json,sys;print(json.load(sys.stdin)['count'])")
+log "   υποψήφια patterns: $pat_count (προτάσεις, όχι κρίσεις)"
+
+log "⑥ ΚΛΑΔΕΨΕ — forget orphans (αρχειοθέτηση, όχι διαγραφή, zero-LLM)"
+if [ "$DRY" -eq 1 ]; then
+  PRUNE_JSON=$(python3 "$MEM/prune.py" --views "$VIEWS" --reflective "$REFLECTIVE" --json)
+  orphan_count=$(echo "$PRUNE_JSON" | python3 -c "import json,sys;print(json.load(sys.stdin)['orphan_count'])")
+  log "   dry-run: $orphan_count orphan views ΘΑ αρχειοθετούνταν"
+else
+  PRUNE_JSON=$(python3 "$MEM/prune.py" --views "$VIEWS" --reflective "$REFLECTIVE" --apply --json)
+  orphan_count=$(echo "$PRUNE_JSON" | python3 -c "import json,sys;print(len(json.load(sys.stdin)['archived']))")
+  log "   $orphan_count orphan views → _archive/ (ποτέ διαγραφή)"
+fi
 
 log "ΟΚ — κύκλος ολοκληρώθηκε (dry=$DRY synth=$SYNTH)"

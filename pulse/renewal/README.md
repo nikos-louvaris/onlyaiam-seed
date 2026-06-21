@@ -9,7 +9,7 @@
 - `cycle.sh` — ο thin harness που τρέχει τις φάσεις.
 
 ## Τα τρία στρώματα (πλήρες: το αρχικό πλάνο στον owner workspace)
-- **Νόμος** (zero-LLM): `../../memory/edge_extract.py` (edges) + `../../memory/recall_law.py` (βάρος) + `../../memory/stale_check.py` (το «κοίτα»).
+- **Νόμος** (zero-LLM): `../../memory/edge_extract.py` (edges) + `../../memory/recall_law.py` (βάρος) + `../../memory/stale_check.py` (το «κοίτα») + `../../memory/pattern_detect.py` (επανάληψη) + `../../memory/prune.py` (λήθη-με-μνήμη).
 - **Κύκλος** (hybrid): εδώ. 6 φάσεις, μηχανικό gate + resonance στη φάση ④.
 - **Έκφραση** (latent): `../express/recall_offer.py` (υποδεικτικός τρόπος) + `../express/drift_gate.md` (φύλακας φωνής).
 
