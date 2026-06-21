@@ -1,0 +1,16 @@
+# secrets — never commit
+*.env
+secrets.env
+.env.master
+*.token
+*.key
+
+# python
+__pycache__/
+*.pyc
+
+# os
+.DS_Store
+
+# private genesis/audit history — owner refs, never ship
+_genesis/

@@ -1,0 +1,16 @@
+#!/bin/bash
+# state-of <entity> [--raw|--deep|--fast]
+# Live state synthesis from your traces + memory + git. ZERO STORAGE. Always
+# fresh. The same law as recall: synthesize at query-time, never persist meaning
+# as truth.
+#   resolve → query (substrate+memory+git) → synthesize (LLM) → present. Never stored.
+set -euo pipefail
+WS="${WORKSPACE:-$HOME/.openclaw/workspace}"; HERE="$WS/state_of"
+ENTITY="${1:?usage: state-of <entity> [flags]}"; shift || true
+RAW=false; OPTS=""
+for a in "$@"; do case "$a" in
+  --raw) RAW=true;; --deep) OPTS="$OPTS --deep";; --fast) OPTS="$OPTS --fast";;
+esac; done
+read -r CANON ETYPE < <(python3 "$HERE/resolve.py" "$ENTITY")   # alias→canonical (seed: identity map empty)
+if $RAW; then python3 "$HERE/query.py" "$CANON" "$ETYPE"; exit 0; fi
+python3 "$HERE/query.py" "$CANON" "$ETYPE" | python3 "$HERE/synthesize.py" $OPTS
