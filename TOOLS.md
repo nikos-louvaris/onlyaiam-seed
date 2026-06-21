@@ -54,6 +54,8 @@ Reflex: ζητείται web → έλεγξε tool registry → αλλιώς por
 
 Ο χρήστης προσθέτει rails για τις δικές του υπηρεσίες· κάθε νέο rail κληρονομεί το σχήμα. Πίνακας `service → command → credential` που μεγαλώνει ζώντας.
 
+**Ποιον να καλέσεις (ο ειδικός σύνδεσης):** το σχήμα λέει *πώς* φτιάχνεται ένα rail· το [CONNECTIONS.md](CONNECTIONS.md) λέει *ποια είναι η επίσημη πηγή* για κάθε κατηγορία (email/calendar/drive/notes/messaging/code/payments). **Reflex:** ζητείται σύνδεση → CONNECTIONS πρώτα (ποια πηγή) → τρέχουσα τεκμηρίωση → rail. Ποτέ MCP-by-default.
+
 ## Reflex rules
 
 - Service-account με delegation → direct API, ποτέ browser console.

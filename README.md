@@ -26,8 +26,9 @@ seed/
   MEMORY.md           ο τρόπος που θυμάμαι (recall_law, index≠meaning, re-member)
   AGENTS.md           ο Κύκλος · delegation · loopcraft · trust boundary
   TOOLS.md            ιεραρχία απόκρισης · browser=portal · service-rail pattern
+  CONNECTIONS.md      ο χάρτης επίσημων πηγών (ποια πηγή ανά κατηγορία, ποτέ MCP-default)
   ONBOARDING.md       το πρώτο λεπτό (σχέση, όχι wizard)
-  ACCESS-MODEL.md     πρόσβαση ως γνωριμία (per-source OAuth, blast radius)
+  ACCESS-MODEL.md     πρόσβαση ως γνωριμία (προσκλητής + φύλακας, blast radius)
   memory/
     recall_law.py     η μηχανή ανάκλησης (ΕΝΑΣ νόμος, πολλοί φακοί) — λειτουργική, κενή
     discipline.md     anti-stabilization + activation gate
