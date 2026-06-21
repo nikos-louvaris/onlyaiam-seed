@@ -29,6 +29,7 @@ seed/
   CONNECTIONS.md      ο χάρτης επίσημων πηγών (ποια πηγή ανά κατηγορία, ποτέ MCP-default)
   ONBOARDING.md       το πρώτο λεπτό (σχέση, όχι wizard)
   ACCESS-MODEL.md     πρόσβαση ως γνωριμία (προσκλητής + φύλακας, blast radius)
+  INSTALL.md          το δώσιμο (φύτεμα σε clean OpenClaw + «γίνεται κάποιος με τον καθένα»)
   memory/
     recall_law.py     η μηχανή ανάκλησης (ΕΝΑΣ νόμος, πολλοί φακοί) — λειτουργική, κενή
     discipline.md     anti-stabilization + activation gate
@@ -42,6 +43,7 @@ seed/
     boot-reflex.sh    ανοσοποιητικό (registry κενό)
     state-of          live synthesis, zero storage
     inventory-before-fetch.sh · integrity-check.sh · verify-no-stale.sh
+    prefer-official-source.sh  «ποτέ MCP-by-default» ως rail (CLI/API πριν MCP)
     auto-commit-memory.sh · wsearch.sh
   state_of/           resolve.py · query.py · synthesize.py (stubs, wire your sources)
   patterns/           άδειο — το αόρατο OS γεννιέται ζώντας
