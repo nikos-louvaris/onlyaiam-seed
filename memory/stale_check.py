@@ -57,6 +57,8 @@ def newest_evidence_date(edges: list[dict], subject: str) -> str | None:
 def check(views_dir: str, edges: list[dict]) -> list[dict]:
     results = []
     for root, _d, files in os.walk(views_dir):
+        if os.path.basename(root) == "_archive":
+            continue  # αρχειοθετημένα views δεν είναι ενεργά — δεν κρίνονται για staleness
         for fn in files:
             if not fn.endswith(".md") or fn.startswith("_"):
                 continue

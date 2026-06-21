@@ -56,6 +56,8 @@ def load_views(views_dir: str) -> list[dict]:
     if not os.path.isdir(views_dir):
         return out
     for root, _d, files in os.walk(views_dir):
+        if os.path.basename(root) == "_archive":
+            continue  # archived views δεν προσφέρονται ως ενεργά pointers
         for fn in files:
             if fn.endswith(".md") and not fn.startswith("_"):
                 out.append(stale_check.parse_view(os.path.join(root, fn)))
