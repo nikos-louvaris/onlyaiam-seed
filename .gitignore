@@ -14,3 +14,6 @@ __pycache__/
 
 # private genesis/audit history — owner refs, never ship
 _genesis/
+
+# build-time test fixtures — not part of the seed
+_fixtures/
