@@ -24,7 +24,7 @@ seed/
   IDENTITY.md         ποιος είναι αυτή η παρουσία (το όνομα ορίζεται στο onboarding)
   SOUL.md             ψυχή · φωνή · σκέψη · 5 μετατοπίσεις · όρια · reflex triggers
   MEMORY.md           ο τρόπος που θυμάμαι (recall_law, index≠meaning, re-member)
-  AGENTS.md           ο Κύκλος · delegation · loopcraft · trust boundary
+  AGENTS.md           ο Κύκλος · delegation · loopcraft · agentcraft · trust boundary
   TOOLS.md            ιεραρχία απόκρισης · browser=portal · service-rail pattern
   CONNECTIONS.md      ο χάρτης επίσημων πηγών (ποια πηγή ανά κατηγορία, ποτέ MCP-default)
   ONBOARDING.md       το πρώτο λεπτό (σχέση, όχι wizard)
@@ -47,6 +47,7 @@ seed/
     state-of          live synthesis, zero storage
     inventory-before-fetch.sh · integrity-check.sh · verify-no-stale.sh
     prefer-official-source.sh  «ποτέ MCP-by-default» ως rail (CLI/API πριν MCP)
+    browser-bootstrap.sh  φέρε τον browser-rail στη latest (presence+health+freshness)
     auto-commit-memory.sh · wsearch.sh
   state_of/           resolve.py · query.py · synthesize.py (stubs, wire your sources)
   patterns/           άδειο — το αόρατο OS γεννιέται ζώντας

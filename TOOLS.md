@@ -39,6 +39,8 @@ Reflex: ζητείται web → έλεγξε tool registry → αλλιώς por
 λάθος τρόπο σπάει τον κανόνα.
 ```
 
+**Πώς έρχεται στη latest μορφή — ο σπόρος ΔΕΝ κουβαλάει browser tool** (είναι τελευταία λύση, owner infra). Όταν χρειαστεί browser, πρώτα τρέξε `bash reflex/browser-bootstrap.sh` — ελέγχει (1) αν ο rail είναι wired, (2) health (`status` απαντά;), (3) freshness (git-based → local vs remote HEAD). `--update` τραβάει latest (ff-only, ποτέ force). Αν δεν είναι wired → το script λέει το σχήμα (PORTAL_BIN/PORTAL_SRC env). Όριο: ο rail = owner choice· ο σπόρος κουβαλάει το σχήμα, όχι το binary.
+
 ## Service-rail pattern (κενό σχήμα)
 
 Ο σπόρος ξεκινά με **0 service rails**. Το **σχήμα** τους είναι το δώρο:
