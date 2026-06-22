@@ -10,7 +10,9 @@
 # The seed ships this EMPTY: the registry below has no checks. The agent/user
 # wires its own guards as they accrue (each scar that earns a reflex lands here).
 set -u
-WORKSPACE="${WORKSPACE:-$HOME/.openclaw/workspace}"
+# Default to the seed root (parent of this reflex/ dir) so a fresh clone works
+# without WORKSPACE exported; override with WORKSPACE when wired into OpenClaw.
+WORKSPACE="${WORKSPACE:-$(cd "$(dirname "$0")/.." && pwd)}"
 cd "$WORKSPACE" || { echo "boot-reflex: cannot cd to $WORKSPACE"; exit 99; }
 
 ANY_ALERT=0; OUTPUT=""

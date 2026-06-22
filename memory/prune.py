@@ -7,7 +7,9 @@ orphan όταν ΚΑΝΕΝΑ υποστηρικτικό ίχνος δεν υπά
 `views/_archive/`** με σφραγίδα `archived_at`. Ο recall_law μπορεί να το ξαναβρεί
 αργότερα (ο φακός «έκπληξη»)· απλώς δεν είναι πια στο ενεργό προσκήνιο.
 
-ΠΟΤΕ δεν αγγίζει live ίχνη. Μόνο compiled views. Trash-by-archive, ποτέ rm.
+ΠΟΤΕ δεν αγγίζει live ίχνη. Μόνο compiled views. Move-by-archive: το view
+αντιγράφεται στο _archive/ με σφραγίδα ΠΡΙΝ φύγει από το ενεργό
+προσκήνιο — ποτέ απώλεια (ζει στο archive + git history).
 
 Usage:
     python3 prune.py --views <dir> --edges <edges.json> [--apply] [--json]

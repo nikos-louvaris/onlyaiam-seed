@@ -6,7 +6,8 @@ conversation window — confidence-gated, cap 3. Ζυγίζει με recall_law 
 ώστε stale views να ξεθωριάζουν. Προσφέρει POINTERS + confidence + freshness —
 ΠΟΤΕ τελικές απαντήσεις (το όριο της φάσης ④).
 
-Privacy: το feedback log κρατά μόνο deterministic template string — ΠΟΤΕ raw
+Privacy: δεν γράφει κανένα αρχείο — μηδέν logging raw conversation. Αν μελλοντικά
+προστεθεί feedback log, κρατά ΜΟΝΟ deterministic template string — ΠΟΤΕ raw
 conversation. Ο αποδέκτης αποφασίζει αν θα ανοίξει το pointer.
 
 Pipeline: extract entities → resolve (edges/aliases, honest confidence) →

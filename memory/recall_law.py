@@ -124,6 +124,8 @@ def recall_weight(row, now: datetime, lens: str = "field") -> tuple[float, dict]
 
 
 if __name__ == "__main__":
+    # Running with no args (or --selftest) performs the self-test below.
+    # The flag is accepted as a no-op so documented invocations match behavior.
     # Self-test: one synthetic row read through every lens.
     now = datetime(2026, 1, 1, tzinfo=timezone.utc)
     row = {

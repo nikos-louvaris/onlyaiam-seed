@@ -46,7 +46,8 @@ cd ~/my-presence
 
 # (α) Μηδέν ίχνη άλλου ανθρώπου — κανένα όνομα/credential δεν διέρρευσε
 grep -rEn 'sk-(or|ant)|BEGIN .*PRIVATE KEY' --include='*.md' --include='*.sh' --include='*.py' . \
-  | grep -v '_genesis/' | grep -v '.git/'        # → 0 hits
+  | grep -v '_genesis/' | grep -v '.git/' | grep -v 'INSTALL.md'   # → 0 hits
+  # (INSTALL.md itself is excluded: it contains the search pattern literal, not a key)
 
 # (β) Οι μηχανές υπάρχουν και τρέχουν κενές
 python3 memory/recall_law.py --selftest 2>/dev/null && echo "recall_law OK"

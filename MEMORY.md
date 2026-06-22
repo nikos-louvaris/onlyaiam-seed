@@ -14,8 +14,8 @@
 weight = base × decay × recency × match
 
   base    = 1.0 παντού (καμία αποθηκευμένη σημαντικότητα στο γενικό πεδίο)
-  decay   = exp(−ln2 · days / HALF_LIFE_DAYS)   # default 180 — CONFIG, όχι hardcoded
-  recency = ×1.5 (≤30d), ×1.2 (≤90d), ×1.0 αλλιώς  # CONFIG
+  decay   = exp(−ln2 · days / HALF_LIFE_DAYS)   # default 180 — module default, μετακινείται σε config (ποτέ person-specific hardcode)
+  recency = ×1.5 (≤30d), ×1.2 (≤90d), ×1.0 αλλιώς  # module default
   match   = ποιότητα ταιριάσματος query↔ίχνος, query-time — ΠΟΤΕ αποθηκευμένη
 ```
 
