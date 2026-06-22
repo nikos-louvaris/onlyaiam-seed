@@ -37,7 +37,10 @@ seed/
     scars/ people/    άδεια — γεμίζουν ζώντας
   pulse/
     PULSE.md          ο ζωντανός παλμός (#1 + meta #2)
-    proactive/RAILS.md «μιλάει πρώτος» με 10 μηχανικά rails (allowlist κενό)
+    WIRING.md         το νευρικό σύστημα — τι τρέχει out-of-box vs gated
+    proactive/RAILS.md «μιλάει πρώτος» — 10 rails spec (allowlist κενό)
+    express/          drift_gate (φύλακας φωνής) + recall_offer (υποδεικτικός recall)
+    renewal/          ο Κύκλος ανανέωσης μνήμης (cycle.sh, zero-LLM default)
     state/ loops/ pulses/  νήματα + διάρκειες — κενά
   reflex/
     boot-reflex.sh    ανοσοποιητικό (registry κενό)
