@@ -5,7 +5,9 @@
 # as truth.
 #   resolve → query (substrate+memory+git) → synthesize (LLM) → present. Never stored.
 set -euo pipefail
-WS="${WORKSPACE:-$HOME/.openclaw/workspace}"; HERE="$WS/state_of"
+# Default to seed root (parent of reflex/) so a fresh clone works without
+# WORKSPACE exported; override with WORKSPACE when wired into OpenClaw.
+WS="${WORKSPACE:-$(cd "$(dirname "$0")/.." && pwd)}"; HERE="$WS/state_of"
 ENTITY="${1:?usage: state-of <entity> [flags]}"; shift || true
 RAW=false; OPTS=""
 for a in "$@"; do case "$a" in

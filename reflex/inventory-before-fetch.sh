@@ -5,7 +5,9 @@
 # exit 0 = no local match, external fetch safe.
 # exit 1 = local hits printed, read them first.
 set -euo pipefail
-WS="${WORKSPACE:-$HOME/.openclaw/workspace}"
+# Default to seed root (parent of reflex/) so a fresh clone works without
+# WORKSPACE exported; override with WORKSPACE when wired into OpenClaw.
+WS="${WORKSPACE:-$(cd "$(dirname "$0")/.." && pwd)}"
 [[ "${1:-}" == "--force" ]] && { shift; echo "FORCE: inventory skipped"; exit 0; }
 Q="${1:?usage: inventory-before-fetch.sh [--force] \"<query>\" [scope...]}"; shift || true
 cd "$WS" 2>/dev/null || { echo "no workspace"; exit 0; }

@@ -1,6 +1,6 @@
 #!/bin/bash
 # auto-commit-memory.sh — memory is version-controlled by default, on cadence.
-cd "${WORKSPACE:-$HOME/.openclaw/workspace}" || exit 0
+cd "${WORKSPACE:-$(cd "$(dirname "$0")/.." && pwd)}" || exit 0
 for p in memory/ MEMORY.md IDENTITY.md SOUL.md; do   # the seed's own memory/identity paths
   [ -e "$p" ] && git add -A "$p" 2>/dev/null
 done
