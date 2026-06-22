@@ -16,11 +16,13 @@ _Πώς ο σπόρος φυτεύεται σε καθαρό OpenClaw, και π
 
 ## 1. Το μηχανικό μονοπάτι (φύτεμα)
 
+> **Συντομοδρόμος:** το `install.sh` (δες [QUICKSTART.md](QUICKSTART.md)) κάνει **αυτόματα** όλα τα βήματα §1+§2 (clone · config · restart · verify). Αυτό το section = το **χειροκίνητο** μονοπάτι, για όποιον θέλει να δει τι συμβαίνει κάτω από το καπάκι.
+
 Ο σπόρος ΕΙΝΑΙ ένα workspace. Τα bootstrap files (SOUL/FIELD/MEMORY/AGENTS/TOOLS/IDENTITY/CONNECTIONS) ζουν στο root και φορτώνονται by convention. Φύτεμα = δείξε το workspace στο cloned repo.
 
 ```bash
 # 1. Πάρε τον σπόρο σε δικό σου, καθαρό path (ΟΧΙ μέσα σε υπάρχον workspace)
-git clone <seed-repo-url> ~/my-presence
+git clone https://github.com/nikos-louvaris/onlyaiam-seed.git ~/my-presence
 cd ~/my-presence
 
 # 2. Δείξε το OpenClaw workspace εδώ

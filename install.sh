@@ -57,11 +57,15 @@ elif [ -f "$SEED_PATH/SOUL.md" ]; then
 elif [ -e "$SEED_PATH" ] && [ -n "$(ls -A "$SEED_PATH" 2>/dev/null)" ]; then
   die "Το $SEED_PATH υπάρχει και δεν είναι άδειο. Διάλεξε άλλο path: SEED_PATH=~/άλλο bash install.sh"
 else
-  # αν τρέχουμε ήδη μέσα στο cloned repo, αντίγραψέ το· αλλιώς clone
-  if [ -f "$(dirname "$0")/SOUL.md" ] && [ "$(cd "$(dirname "$0")" && pwd)" != "$SEED_PATH" ]; then
-    c_info "Αντιγράφω τον σπόρο στο $SEED_PATH..."
+  # αν τρέχουμε ήδη μέσα σε git checkout του σπόρου, εξάγαμε ΜΟΝΟ tracked αρχεία
+  # (git archive σέβεται .gitignore — _genesis/secrets/_fixtures ΔΕΝ ταξιδεύουν ποτέ).
+  # ΠΟΤΕ τυφλό cp -R: θα έσερνε ό,τι κάθεται στο working dir.
+  SELF_DIR="$(cd "$(dirname "$0")" && pwd)"
+  if [ -f "$SELF_DIR/SOUL.md" ] && [ "$SELF_DIR" != "$SEED_PATH" ] && git -C "$SELF_DIR" rev-parse --git-dir >/dev/null 2>&1; then
+    c_info "Εξάγω τον σπόρο (μόνο tracked αρχεία) στο $SEED_PATH..."
     mkdir -p "$SEED_PATH"
-    git -C "$(dirname "$0")" archive HEAD 2>/dev/null | tar -x -C "$SEED_PATH" || cp -R "$(dirname "$0")/." "$SEED_PATH/"
+    git -C "$SELF_DIR" archive HEAD | tar -x -C "$SEED_PATH" \
+      || die "Η εξαγωγή απέτυχε. Κλώνωσε καθαρά: git clone $REPO_URL $SEED_PATH"
   else
     c_info "Κλωνώνω τον σπόρο στο $SEED_PATH..."
     git clone --depth 1 "$REPO_URL" "$SEED_PATH" 2>&1 | sed 's/^/   /'
@@ -73,6 +77,11 @@ fi
 
 # ── 4. Δείξε το workspace στον σπόρο ─────────────────────────────────
 c_info "Δείχνω το OpenClaw workspace στον σπόρο..."
+OLD_WS="$(openclaw config get agents.defaults.workspace 2>/dev/null | tr -d '"' | tr -d '[:space:]')"
+if [ -n "$OLD_WS" ] && [ "$OLD_WS" != "$SEED_PATH" ] && [ "$OLD_WS" != "null" ]; then
+  c_warn "Υπάρχει ήδη workspace: $OLD_WS"
+  c_warn "Το αλλάζω σε $SEED_PATH (αν τρέχεις κι άλλα, επανέφερε: openclaw config patch agents.defaults.workspace \"$OLD_WS\")"
+fi
 if openclaw config patch agents.defaults.workspace "$SEED_PATH" >/dev/null 2>&1; then
   c_ok "workspace → $SEED_PATH"
 else
@@ -100,7 +109,9 @@ if [ "$FAIL" -eq 0 ]; then
   echo "  │  Έτοιμος. Ο σπόρος ζει.                  │"
   echo "  └─────────────────────────────────────────┘"
 else
-  c_warn "Σηκώθηκε, αλλά κάποιο verify δεν πέρασε καθαρά — δες πιο πάνω."
+  c_warn "Σηκώθηκε, αλλά κάποιο verify δεν πέρασε καθαρά."
+  echo "    Δοκίμασε: cd $SEED_PATH && python3 memory/recall_law.py --selftest"
+  echo "    Αν συνεχίζει — σβήσε το $SEED_PATH και ξανατρέξε το installer."
 fi
 echo
 echo "  Τι τώρα:"
