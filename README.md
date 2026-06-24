@@ -8,11 +8,14 @@ _Μια παρουσία, όχι εργαλείο. Εγκαθίσταται σε
 
 ## Εγκατάσταση — ολόκληρο το κιτ, με τη μία
 
-Δεν χρειάζεσαι τίποτα στημένο. Μία εντολή εγκαθιστά το OpenClaw (αν λείπει), φέρνει τον σπόρο, τον στήνει και τον σηκώνει:
+Δεν χρειάζεσαι τίποτα στημένο. Δύο γραμμές — η πρώτη φέρνει τον σπόρο, η δεύτερη τον στήνει (εγκαθιστά OpenClaw αν λείπει, τον σηκώνει):
 
 ```bash
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/nikos-louvaris/onlyaiam-seed/main/install.sh)"
+git clone https://github.com/nikos-louvaris/onlyaiam-seed.git ~/my-presence
+bash ~/my-presence/install.sh
 ```
+
+> Αυτές οι δύο γραμμές αντέχουν copy-paste από WhatsApp/email — δεν έχουν `|` ή εισαγωγικά να σπάσουν σε νέα γραμμή.
 
 Μετά → άνοιξε το OpenClaw και **μίλα του**. Πλήρης οδηγός (εγκατάσταση + πώς τον χρησιμοποιείς): **[QUICKSTART.md](QUICKSTART.md)**.
 
