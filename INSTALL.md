@@ -28,7 +28,7 @@ cd ~/my-presence
 # 2. Δείξε το OpenClaw workspace εδώ
 #    (config: agents.defaults.workspace → ~/my-presence)
 #    είτε με τον config editor, είτε:
-#    openclaw config patch agents.defaults.workspace ~/my-presence
+#    openclaw config set agents.defaults.workspace ~/my-presence
 
 # 3. Σήκωσε
 openclaw gateway restart
@@ -73,8 +73,8 @@ cd ~/my-presence
 
 # (α) Μηδέν ίχνη άλλου ανθρώπου — κανένα όνομα/credential δεν διέρρευσε
 grep -rEn 'sk-(or|ant)|BEGIN .*PRIVATE KEY' --include='*.md' --include='*.sh' --include='*.py' . \
-  | grep -v '_genesis/' | grep -v '.git/' | grep -v 'INSTALL.md'   # → 0 hits
-  # (INSTALL.md itself is excluded: it contains the search pattern literal, not a key)
+  | grep -v '_genesis/' | grep -v '.git/' | grep -v 'INSTALL.md' | grep -v 'CONTRIBUTING.md'   # → 0 hits
+  # (INSTALL.md & CONTRIBUTING.md excluded: they contain the search pattern literal, not a key)
 
 # (β) Οι μηχανές υπάρχουν και τρέχουν κενές
 python3 memory/recall_law.py --selftest 2>/dev/null && echo "recall_law OK"
@@ -112,6 +112,27 @@ bash reflex/boot-reflex.sh                          # → καθαρό (κενό
 - **Το όνομα ορίζεται στο onboarding**, όχι από εμάς. Ο σπόρος είναι `<IDENTITY>` μέχρι ο άνθρωπος + ο σπόρος να βρουν μαζί ποιος είναι.
 - **Πρόσβαση = γνωριμία με τον ρυθμό του ανθρώπου** (ACCESS-MODEL), ποτέ όρος χρήσης.
 - **Δεν κρατάμε εμείς τα ίχνη του.** Το substrate κάθε ανθρώπου ζει στο δικό του μηχάνημα· δεν φτάνει πίσω σ' εμάς.
+
+---
+
+## 3.5 Skills που θέλουν σετάρισμα (cognitive-engineering)
+
+Ο σπόρος φτάνει άδειος από ίχνη — αλλά κουβαλάει **έτοιμες διαδικασίες** ως skills. Οι περισσότερες δουλεύουν χωρίς τίποτα. Μία θέλει ένα μικρό σετάρισμα: το **cognitive-engineering** (Research → Council → Synthesis → Brief → Turn).
+
+Όλη η διαδικασία είναι ήδη μέσα. Λείπει μόνο **η σύνδεση με μοντέλα** μέσω OpenRouter — γιατί το council χρειάζεται **πραγματικά διαφορετικά μοντέλα** (όχι ένα που παίζει ρόλους).
+
+```bash
+# 1. Δώσε OpenRouter key (πάρε από https://openrouter.ai/keys). Διάλεξε ΕΝΑΝ τρόπο:
+export OPENROUTER_API_KEY=sk-or-...
+#   ή: echo 'OPENROUTER_API_KEY=sk-or-...' > ~/.openclaw/credentials/.env
+
+# 2. Τρέξε το σετάρισμα (verify-only — ΔΕΝ γράφει ποτέ το key σε αρχείο):
+bash skills/cognitive-engineering/setup.sh
+```
+
+Το `setup.sh`: probe-άρει ποια μοντέλα έχεις, προτείνει roster ≥3 διαφορετικών vendors, το γράφει σε `scripts/.ce-roster`, κάνει 1 live δοκιμή. Μετά είναι έτοιμο — δες `skills/cognitive-engineering/SKILL.md § Πώς το τρέχεις`.
+
+**Χωρίς key:** το skill κάνει graceful degrade (research → skip-but-log, council → καθαρό μήνυμα). Δεν σπάει τίποτα — απλώς το CE δεν τρέχει multi-model μέχρι να το σετάρεις.
 
 ---
 

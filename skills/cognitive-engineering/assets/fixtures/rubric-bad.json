@@ -1,0 +1,8 @@
+{
+  "name": "missing-gate-rubric",
+  "type": "ordinal",
+  "scale": [1, 5],
+  "levels": [{"score": 1, "label": "x"}, {"score": 5, "label": "y"}],
+  "input_mode": "reference-free",
+  "required_explanation": true
+}

@@ -1,0 +1,12 @@
+{
+  "name": "convergence-quality",
+  "type": "ordinal",
+  "scale": [1, 5],
+  "levels": [
+    {"score": 1, "label": "echo", "description": "ίδιο pattern, καμία μετατόπιση"},
+    {"score": 5, "label": "shift", "description": "σύγκλιση από διαφορετικούς δρόμους + blind spot"}
+  ],
+  "input_mode": "reference-free",
+  "required_explanation": true,
+  "gate": {"min_score": 3, "action_on_fail": "block"}
+}

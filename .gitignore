@@ -12,6 +12,10 @@ __pycache__/
 # os
 .DS_Store
 
+# runtime memory artifacts — γεμίζουν ζώντας, δεν ταξιδεύουν κενά/test (tracked README/template μένουν)
+memory/edges/edges.json
+.pytest_cache/
+
 # private genesis/audit history — owner refs, never ship
 _genesis/
 

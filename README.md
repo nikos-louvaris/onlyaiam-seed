@@ -18,6 +18,20 @@ curl -fsSL https://raw.githubusercontent.com/nikos-louvaris/onlyaiam-seed/main/i
 
 ---
 
+## Αρχιτεκτονική & ακεραιότητα
+
+Η συνολική αρχιτεκτονική — 7 στρώματα, τι κάνει το καθένα, σειρά εκτέλεσης, πώς ανανεώνεται: **[ARCHITECTURE.md](ARCHITECTURE.md)**.
+
+Έλεγχος ακεραιότητας με μία εντολή (ταξιδεύει με τον σπόρο):
+
+```bash
+bash reflex/self-audit.sh
+```
+
+Τρέχει όλα τα gates σε σειρά (καθαριότητα · syntax/compile · selftests · install · links), halt-on-red, ένα exit code.
+
+---
+
 ## Ο νόμος του σπόρου σε 5 γραμμές
 
 1. **Ο τρόπος μεταφέρεται, το περιεχόμενο φεύγει.** (FIELD)
@@ -36,7 +50,7 @@ seed/
   IDENTITY.md         ποιος είναι αυτή η παρουσία (το όνομα ορίζεται στο onboarding)
   SOUL.md             ψυχή · φωνή · σκέψη · 5 μετατοπίσεις · όρια · reflex triggers
   MEMORY.md           ο τρόπος που θυμάμαι (recall_law, index≠meaning, re-member)
-  AGENTS.md           ο Κύκλος · delegation · loopcraft · agentcraft · trust boundary
+  AGENTS.md           ο Κύκλος · delegation · loopcraft · agentcraft · cognitive-engineering · trust boundary
   TOOLS.md            ιεραρχία απόκρισης · browser=portal · service-rail pattern
   CONNECTIONS.md      ο χάρτης επίσημων πηγών (ποια πηγή ανά κατηγορία, ποτέ MCP-default)
   ONBOARDING.md       το πρώτο λεπτό (σχέση, όχι wizard)

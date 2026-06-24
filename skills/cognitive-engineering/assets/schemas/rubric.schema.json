@@ -1,0 +1,66 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "ce-skill/rubric.schema.json",
+  "title": "Judge Rubric",
+  "description": "Validated-judge rubric. Binary ή ordinal, με ρητό gate (min_score + action_on_fail).",
+  "type": "object",
+  "required": ["name", "type", "scale", "levels", "input_mode", "required_explanation", "gate"],
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "type": {
+      "type": "string",
+      "enum": ["binary", "ordinal"]
+    },
+    "scale": {
+      "description": "Εύρος βαθμολογίας (π.χ. [0,1] για binary, [1,5] για ordinal)",
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": { "type": "number" }
+    },
+    "levels": {
+      "description": "Ορισμός κάθε επιπέδου της κλίμακας (anchor → περιγραφή)",
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["score", "label"],
+        "additionalProperties": false,
+        "properties": {
+          "score": { "type": "number" },
+          "label": { "type": "string", "minLength": 1 },
+          "description": { "type": "string" }
+        }
+      }
+    },
+    "input_mode": {
+      "type": "string",
+      "enum": ["reference-free", "reference-based", "pairwise"],
+      "description": "Πώς τροφοδοτείται ο judge"
+    },
+    "required_explanation": {
+      "type": "boolean",
+      "description": "Αν ο judge ΥΠΟΧΡΕΟΥΤΑΙ να δικαιολογήσει πριν βαθμολογήσει"
+    },
+    "gate": {
+      "type": "object",
+      "required": ["min_score", "action_on_fail"],
+      "additionalProperties": false,
+      "properties": {
+        "min_score": {
+          "type": "number",
+          "description": "Κατώφλι κάτω από το οποίο το gate σκάει"
+        },
+        "action_on_fail": {
+          "type": "string",
+          "enum": ["block", "warn", "retry", "escalate"],
+          "description": "Τι γίνεται όταν score < min_score"
+        }
+      }
+    }
+  }
+}

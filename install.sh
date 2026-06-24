@@ -42,8 +42,8 @@ c_ok "git · python3 · node $(node --version) · npm $(npm --version)"
 if have openclaw; then
   c_ok "OpenClaw ήδη εγκατεστημένο ($(openclaw --version 2>/dev/null | head -1))"
 else
-  c_info "Εγκαθιστώ OpenClaw (npm install -g openclaw)..."
-  npm install -g openclaw || die "Απέτυχε η εγκατάσταση του OpenClaw. Δες το σφάλμα πιο πάνω (ίσως χρειάζεται sudo ή npm prefix fix)."
+  c_info "Εγκαθιστώ OpenClaw (npm install -g openclaw@2026.6.1 — δοκιμασμένη έκδοση)..."
+  npm install -g openclaw@2026.6.1 || die "Απέτυχε η εγκατάσταση του OpenClaw. Δες το σφάλμα πιο πάνω (ίσως χρειάζεται sudo ή npm prefix fix)."
   have openclaw || die "Το OpenClaw εγκαταστάθηκε αλλά δεν βρίσκεται στο PATH. Άνοιξε νέο terminal και ξανατρέξε."
   c_ok "OpenClaw εγκαταστάθηκε ($(openclaw --version 2>/dev/null | head -1))"
 fi
@@ -80,13 +80,13 @@ c_info "Δείχνω το OpenClaw workspace στον σπόρο..."
 OLD_WS="$(openclaw config get agents.defaults.workspace 2>/dev/null | tr -d '"' | tr -d '[:space:]')"
 if [ -n "$OLD_WS" ] && [ "$OLD_WS" != "$SEED_PATH" ] && [ "$OLD_WS" != "null" ]; then
   c_warn "Υπάρχει ήδη workspace: $OLD_WS"
-  c_warn "Το αλλάζω σε $SEED_PATH (αν τρέχεις κι άλλα, επανέφερε: openclaw config patch agents.defaults.workspace \"$OLD_WS\")"
+  c_warn "Το αλλάζω σε $SEED_PATH (αν τρέχεις κι άλλα, επανέφερε: openclaw config set agents.defaults.workspace \"$OLD_WS\")"
 fi
-if openclaw config patch agents.defaults.workspace "$SEED_PATH" >/dev/null 2>&1; then
+if openclaw config set agents.defaults.workspace "$SEED_PATH" >/dev/null 2>&1; then
   c_ok "workspace → $SEED_PATH"
 else
   c_warn "Δεν μπόρεσα αυτόματα. Βάλ' το χειροκίνητα:"
-  echo "      openclaw config patch agents.defaults.workspace \"$SEED_PATH\""
+  echo "      openclaw config set agents.defaults.workspace \"$SEED_PATH\""
 fi
 
 # ── 5. Σήκωσέ τον ────────────────────────────────────────────────────
@@ -99,6 +99,15 @@ echo
 c_info "Επαληθεύω ότι σηκώθηκε καθαρός..."
 cd "$SEED_PATH"
 FAIL=0
+# Το ΕΝΑ πράγμα που κάνει το installer: δείχνει το workspace στον σπόρο — το verify πρέπει να το ελέγχει.
+ACTUAL_WS="$(openclaw config get agents.defaults.workspace 2>/dev/null | tr -d '"' | tr -d '[:space:]')"
+if [ "$ACTUAL_WS" = "$SEED_PATH" ]; then
+  c_ok "workspace ενεργό → $SEED_PATH"
+else
+  c_warn "workspace ΔΕΝ δείχνει στον σπόρο (δείχνει: ${ACTUAL_WS:-κενό})"
+  echo "      Διόρθωσε: openclaw config set agents.defaults.workspace \"$SEED_PATH\" && openclaw gateway restart"
+  FAIL=1
+fi
 python3 memory/recall_law.py --selftest >/dev/null 2>&1 && c_ok "μνήμη (recall_law) OK" || { c_warn "recall_law selftest"; FAIL=1; }
 bash reflex/boot-reflex.sh >/dev/null 2>&1 && c_ok "ανοσοποιητικό (boot-reflex) OK" || { c_warn "boot-reflex"; FAIL=1; }
 

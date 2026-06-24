@@ -1,0 +1,13 @@
+{
+  "title": "CE decision brief — fixture (bad: λείπει validation_gate)",
+  "components": [
+    {
+      "choice": "Θα κάνουμε το council πιο έξυπνο",
+      "why": "Ακούγεται καλό",
+      "plan_b": "Κάτι άλλο",
+      "trigger": "Αν δεν δουλέψει",
+      "cost": "Άγνωστο",
+      "model": "TBD"
+    }
+  ]
+}

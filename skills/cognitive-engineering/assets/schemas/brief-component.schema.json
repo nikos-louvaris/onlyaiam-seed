@@ -1,0 +1,62 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "ce-skill/brief-component.schema.json",
+  "title": "Brief Component",
+  "description": "Ένα component ενός decision brief. Χωρίς validation_gate ένα component είναι wishlist, όχι απόφαση.",
+  "type": "object",
+  "required": ["components"],
+  "additionalProperties": true,
+  "properties": {
+    "title": { "type": "string" },
+    "components": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/definitions/component" }
+    }
+  },
+  "definitions": {
+    "component": {
+      "type": "object",
+      "required": ["choice", "why", "plan_b", "trigger", "cost", "validation_gate", "model"],
+      "additionalProperties": true,
+      "properties": {
+        "name": { "type": "string", "description": "Προαιρετικό όνομα component" },
+        "choice": {
+          "type": "string",
+          "description": "Τι αποφασίστηκε",
+          "minLength": 1
+        },
+        "why": {
+          "type": "string",
+          "description": "Γιατί αυτή η επιλογή (evidence-backed)",
+          "minLength": 1
+        },
+        "plan_b": {
+          "type": "string",
+          "description": "Εναλλακτική αν αποτύχει",
+          "minLength": 1
+        },
+        "trigger": {
+          "type": "string",
+          "description": "Πότε γυρνάμε στο plan_b (μετρήσιμο σήμα)",
+          "minLength": 1
+        },
+        "cost": {
+          "type": "string",
+          "description": "Κόστος (χρόνος/χρήμα/tokens)",
+          "minLength": 1
+        },
+        "validation_gate": {
+          "type": "string",
+          "description": "Το μηχανικό gate που κάνει το component falsifiable. Χωρίς αυτό = wishlist.",
+          "minLength": 1
+        },
+        "model": {
+          "type": "string",
+          "description": "Ποιο μοντέλο/εργαλείο αναλαμβάνει",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

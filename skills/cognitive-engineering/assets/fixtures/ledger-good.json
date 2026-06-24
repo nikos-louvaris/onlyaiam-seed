@@ -1,0 +1,19 @@
+{
+  "title": "CE research ledger — fixture (good)",
+  "entries": [
+    {
+      "tag": "multi-model-anti-echo",
+      "evidence": "Heterogeneous models reduce correlated errors vs single-model role-play",
+      "source_url": "https://arxiv.org/abs/2305.14325",
+      "checked_date": "2026-06-24",
+      "status": "green"
+    },
+    {
+      "tag": "openrouter-explicit-model",
+      "evidence": "OpenRouter returns the served model id in response.model; can diverge from requested under fallback routing",
+      "source_url": "https://openrouter.ai/docs/features/provider-routing",
+      "checked_date": "2026-06-24",
+      "status": "green"
+    }
+  ]
+}

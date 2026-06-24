@@ -1,0 +1,23 @@
+{
+  "title": "CE decision brief — fixture (good)",
+  "components": [
+    {
+      "choice": "bash + python3 + OpenRouter (όχι LangGraph)",
+      "why": "Σωστό altitude· deterministic glue, μία κλήση/μοντέλο, grep-familiar",
+      "plan_b": "Πρόσθεσε λεπτό orchestration layer αν χρειαστεί retries/branching",
+      "trigger": "Όταν >3 stages χρειάζονται conditional fan-out που το bash κάνει δυσανάγνωστο",
+      "cost": "~0 setup· flat per-call OpenRouter",
+      "validation_gate": "gate.sh council → ≥3 ανεξάρτητες φωνές, model_actual==requested",
+      "model": "deterministic shell (καμία κρίση)"
+    },
+    {
+      "choice": "Model-match assert σε κάθε voice",
+      "why": "Πρόβλημα 2 — silent fallback μολύνει τη σύγκλιση",
+      "plan_b": "Pin provider με allow_fallbacks=false αν degradation επιμένει",
+      "trigger": "≥1 DEGRADED στο _degraded.log ανά run",
+      "cost": "Μηδέν — ένα string compare",
+      "validation_gate": "_council-meta.json: degraded=false για ≥3 voices",
+      "model": "council.sh (python parse)"
+    }
+  ]
+}

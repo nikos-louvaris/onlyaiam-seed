@@ -1,0 +1,10 @@
+{
+  "title": "CE research ledger — fixture (bad: λείπει source_url)",
+  "entries": [
+    {
+      "tag": "unverified-claim",
+      "evidence": "Το council παράγει πάντα αληθινή σύγκλιση",
+      "checked_date": "2026-06-24"
+    }
+  ]
+}
