@@ -124,10 +124,13 @@ bash reflex/boot-reflex.sh >/dev/null 2>&1 && c_ok "ανοσοποιητικό (
 # Ο σπόρος σηκώθηκε αλλά χωρίς μοντέλο δεν μιλάει (πέφτει στο OpenClaw
 # default που σε καθαρό μηχάνημα δεν έχει auth → "auth failed"). Αν δεν
 # υπάρχει ήδη ρυθμισμένο Anthropic/OpenAI/OpenRouter auth, τρέχουμε το setup.
+# ΠΡΟΣΟΧΗ: το `models status` τυπώνει πάντα τα labels (oauth=/token=/api_key=) ακόμα
+# κι όταν τα counts είναι 0 — άρα grep στα labels = false-positive. Ελέγχουμε
+# πραγματικό count > 0 (π.χ. "api_key=2", "oauth=1"). Σε καθαρό μηχάνημα
+# όλα 0 ή κανένας provider → NEED_MODEL=1.
 NEED_MODEL=1
-if openclaw models status 2>/dev/null | grep -qiE 'Shell env *: *on|api_key|oauth|token'; then
-  # υπάρχει κάποιο auth profile — μάλλον έτοιμος
-  NEED_MODEL=0
+if openclaw models status 2>/dev/null | grep -qE '(oauth|token|api_key)=[1-9]'; then
+  NEED_MODEL=0   # υπάρχει τουλάχιστον ένα πραγματικό credential
 fi
 if [ "$NEED_MODEL" -eq 1 ] && [ -f "$SEED_PATH/setup-model.sh" ]; then
   if [ -t 0 ]; then
