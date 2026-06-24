@@ -77,7 +77,9 @@ fi
 
 # ── 4. Δείξε το workspace στον σπόρο ─────────────────────────────────
 c_info "Δείχνω το OpenClaw workspace στον σπόρο..."
-OLD_WS="$(openclaw config get agents.defaults.workspace 2>/dev/null | tr -d '"' | tr -d '[:space:]')"
+# σε ΚΑΘΑΡΟ μηχάνημα το `config get` βγάζει non-zero (δεν υπάρχει config ακόμα).
+# Με `set -euo pipefail` αυτό σκοτώνει το script στην ανάθεση → `|| true` το κρατά ζωντανό.
+OLD_WS="$(openclaw config get agents.defaults.workspace 2>/dev/null | tr -d '"' | tr -d '[:space:]' || true)"
 if [ -n "$OLD_WS" ] && [ "$OLD_WS" != "$SEED_PATH" ] && [ "$OLD_WS" != "null" ]; then
   c_warn "Υπάρχει ήδη workspace: $OLD_WS"
   c_warn "Το αλλάζω σε $SEED_PATH (αν τρέχεις κι άλλα, επανέφερε: openclaw config set agents.defaults.workspace \"$OLD_WS\")"
@@ -104,7 +106,7 @@ FAIL=0
 # από race (το config μπορεί να διαβαστεί πριν προλάβει το reload).
 ACTUAL_WS=""
 for _try in 1 2 3 4 5; do
-  ACTUAL_WS="$(openclaw config get agents.defaults.workspace 2>/dev/null | tr -d '"' | tr -d '[:space:]')"
+  ACTUAL_WS="$(openclaw config get agents.defaults.workspace 2>/dev/null | tr -d '"' | tr -d '[:space:]' || true)"
   [ "$ACTUAL_WS" = "$SEED_PATH" ] && break
   sleep 1
 done
