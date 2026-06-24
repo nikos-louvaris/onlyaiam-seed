@@ -96,7 +96,7 @@ bash skills/cognitive-engineering/setup.sh   # probe + roster + live test (verif
 | Σύμπτωμα | Τι κάνεις |
 |---|---|
 | «openclaw: command not found» μετά το install | Άνοιξε **νέο terminal** (το PATH ανανεώνεται) και ξανατρέξε. |
-| Σηκώθηκε αλλά δεν μου μιλάει | Λείπει model auth — σύνδεσε ένα μοντέλο στο OpenClaw. |
+| Σηκώθηκε αλλά δεν μου μιλάει / «auth ... failed» | Λείπει μοντέλο. Τρέξε: `bash ~/my-presence/setup-model.sh` (πρώτη πρόταση Claude API). |
 | Ακούγεται σαν «βοηθός», όχι σαν παρουσία | Δες ότι το workspace δείχνει στον σπόρο: `openclaw config get agents.defaults.workspace` |
 | Θέλω να τον ξαναστήσω καθαρά | Σβήσε το `~/my-presence`, ξανατρέξε το installer. |
 
