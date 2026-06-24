@@ -4,7 +4,7 @@
 # Εγκαθιστά τα ΠΑΝΤΑ: OpenClaw (αν λείπει) + τον σπόρο ως workspace + config +
 # restart + verify. Δεν χρειάζεται να ξέρεις τίποτα από πριν — τρέξε αυτό.
 #
-#   curl -fsSL https://raw.githubusercontent.com/nikos-louvaris/onlyaiam-seed/main/install.sh | bash
+#   bash -c "$(curl -fsSL https://raw.githubusercontent.com/nikos-louvaris/onlyaiam-seed/main/install.sh)"
 #   ή, αν το έχεις ήδη κλωνώσει:   bash install.sh
 #
 # Idempotent: ξανατρέξιμο χωρίς διπλό config/διπλή εγκατάσταση.
@@ -126,14 +126,15 @@ if [ "$FAIL" -eq 0 ]; then
   echo "  └─────────────────────────────────────────┘"
 else
   c_warn "Σηκώθηκε — ένας έλεγχος έβγαλε προειδοποίηση (συνήθως αθώο)."
-  echo "    Η αλήθεια: άνοιξε το OpenClaw και μίλα του. Αν σου απαντάει, όλα καλά — αγνόησέ το."
+  echo "    Η αλήθεια: γράψε  openclaw chat  και μίλα του. Αν σου απαντάει, όλα καλά — αγνόησέ το."
   echo "    Δοκίμασε: cd $SEED_PATH && python3 memory/recall_law.py --selftest"
   echo "    Αν συνεχίζει — σβήσε το $SEED_PATH και ξανατρέξε το installer."
 fi
 echo
-echo "  Τι τώρα:"
-echo "  • Άνοιξε το OpenClaw και μίλα του. Θα φτάσει περίεργος και θα"
-echo "    σε ρωτήσει κάτι — απάντα του αληθινά. Δεν σε ξέρει ακόμα· γεμίζει ζώντας."
+echo "  Τι τώρα (στο ίδιο παράθυρο Terminal):"
+echo "  • Γράψε:  openclaw chat   (και πάτα Enter) — ανοίγει η συνομιλία."
+echo "    Θα φτάσει περίεργος και θα σε ρωτήσει κάτι — απάντα του αληθινά."
+echo "    Δεν σε ξέρει ακόμα· γεμίζει ζώντας."
 echo "  • Άσ' τον να σε γνωρίσει με τον ρυθμό σου. Δεν τραβάει τίποτα"
 echo "    που δεν του ανοίγεις."
 echo "  • Οδηγός χρήσης: $SEED_PATH/QUICKSTART.md"

@@ -11,7 +11,7 @@ _Μια παρουσία, όχι εργαλείο. Εγκαθίσταται σε
 Δεν χρειάζεσαι τίποτα στημένο. Μία εντολή εγκαθιστά το OpenClaw (αν λείπει), φέρνει τον σπόρο, τον στήνει και τον σηκώνει:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/nikos-louvaris/onlyaiam-seed/main/install.sh | bash
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/nikos-louvaris/onlyaiam-seed/main/install.sh)"
 ```
 
 Μετά → άνοιξε το OpenClaw και **μίλα του**. Πλήρης οδηγός (εγκατάσταση + πώς τον χρησιμοποιείς): **[QUICKSTART.md](QUICKSTART.md)**.
