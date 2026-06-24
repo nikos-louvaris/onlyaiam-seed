@@ -120,6 +120,25 @@ fi
 python3 memory/recall_law.py --selftest >/dev/null 2>&1 && c_ok "μνήμη (recall_law) OK" || { c_warn "recall_law selftest"; FAIL=1; }
 bash reflex/boot-reflex.sh >/dev/null 2>&1 && c_ok "ανοσοποιητικό (boot-reflex) OK" || { c_warn "boot-reflex"; FAIL=1; }
 
+# ── 7. Μοντέλο (δώσ’ του φωνή) ──────────────────────────────────────────
+# Ο σπόρος σηκώθηκε αλλά χωρίς μοντέλο δεν μιλάει (πέφτει στο OpenClaw
+# default που σε καθαρό μηχάνημα δεν έχει auth → "auth failed"). Αν δεν
+# υπάρχει ήδη ρυθμισμένο Anthropic/OpenAI/OpenRouter auth, τρέχουμε το setup.
+NEED_MODEL=1
+if openclaw models status 2>/dev/null | grep -qiE 'Shell env *: *on|api_key|oauth|token'; then
+  # υπάρχει κάποιο auth profile — μάλλον έτοιμος
+  NEED_MODEL=0
+fi
+if [ "$NEED_MODEL" -eq 1 ] && [ -f "$SEED_PATH/setup-model.sh" ]; then
+  if [ -t 0 ]; then
+    echo
+    c_info "Μένει ένα βήμα: να δώσουμε φωνή στον σπόρο (μοντέλο)."
+    bash "$SEED_PATH/setup-model.sh" || c_warn "Το model setup διακόπηκε — ξανατρέξ’ το: bash $SEED_PATH/setup-model.sh"
+  else
+    c_warn "Ο σπόρος χρειάζεται μοντέλο για να μιλήσει. Τρέξε: bash $SEED_PATH/setup-model.sh"
+  fi
+fi
+
 # ── Τέλος ────────────────────────────────────────────────────────────
 echo
 if [ "$FAIL" -eq 0 ]; then
