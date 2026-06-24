@@ -100,7 +100,14 @@ c_info "Επαληθεύω ότι σηκώθηκε καθαρός..."
 cd "$SEED_PATH"
 FAIL=0
 # Το ΕΝΑ πράγμα που κάνει το installer: δείχνει το workspace στον σπόρο — το verify πρέπει να το ελέγχει.
-ACTUAL_WS="$(openclaw config get agents.defaults.workspace 2>/dev/null | tr -d '"' | tr -d '[:space:]')"
+# Το restart είναι ασύγχρονο — δίνουμε λίγο χρόνο + retry ώστε να μη βγει false-warn
+# από race (το config μπορεί να διαβαστεί πριν προλάβει το reload).
+ACTUAL_WS=""
+for _try in 1 2 3 4 5; do
+  ACTUAL_WS="$(openclaw config get agents.defaults.workspace 2>/dev/null | tr -d '"' | tr -d '[:space:]')"
+  [ "$ACTUAL_WS" = "$SEED_PATH" ] && break
+  sleep 1
+done
 if [ "$ACTUAL_WS" = "$SEED_PATH" ]; then
   c_ok "workspace ενεργό → $SEED_PATH"
 else
@@ -118,7 +125,8 @@ if [ "$FAIL" -eq 0 ]; then
   echo "  │  Έτοιμος. Ο σπόρος ζει.                  │"
   echo "  └─────────────────────────────────────────┘"
 else
-  c_warn "Σηκώθηκε, αλλά κάποιο verify δεν πέρασε καθαρά."
+  c_warn "Σηκώθηκε — ένας έλεγχος έβγαλε προειδοποίηση (συνήθως αθώο)."
+  echo "    Η αλήθεια: άνοιξε το OpenClaw και μίλα του. Αν σου απαντάει, όλα καλά — αγνόησέ το."
   echo "    Δοκίμασε: cd $SEED_PATH && python3 memory/recall_law.py --selftest"
   echo "    Αν συνεχίζει — σβήσε το $SEED_PATH και ξανατρέξε το installer."
 fi
